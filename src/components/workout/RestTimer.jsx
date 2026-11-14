@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Bell, Minus, Pause, Play, Plus, RotateCcw, Timer, X } from 'lucide-react'
+import { Bell, Pause, Play, RotateCcw, Timer, X } from 'lucide-react'
 import { playAlert, vibrate } from '../../utils/sound'
 
 export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
@@ -61,28 +61,35 @@ export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
     return `${mins}:${String(rem).padStart(2, '0')}`
   }
 
-  const progressPct = targetSeconds > 0
-    ? Math.max(0, Math.min(100, ((targetSeconds - secondsRemaining) / targetSeconds) * 100))
-    : 0
+  const progressPct =
+    targetSeconds > 0
+      ? Math.max(0, Math.min(100, ((targetSeconds - secondsRemaining) / targetSeconds) * 100))
+      : 0
 
   return (
-    <div className={`rounded-2xl border p-4 sm:p-5 transition-all ${
-      isCompleted
-        ? 'bg-emerald-950/40 border-emerald-500/50 shadow-lg shadow-emerald-950/30'
-        : 'bg-zinc-900 border-zinc-800'
-    }`}>
+    <div
+      className={`rounded-2xl border p-4 sm:p-5 transition-all ${
+        isCompleted
+          ? 'bg-gradient-to-br from-emerald-500/20 via-[#0e1526] to-[#090d16] border-emerald-400/50 shadow-lg shadow-emerald-500/15'
+          : 'surface-card'
+      }`}
+    >
       <div className="flex items-center justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2">
-          <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${
-            isCompleted ? 'bg-emerald-500 text-zinc-950' : 'bg-cyan-500/15 text-cyan-400'
-          }`}>
+        <div className="flex items-center gap-2.5">
+          <div
+            className={`flex h-9 w-9 items-center justify-center rounded-xl ${
+              isCompleted
+                ? 'bg-emerald-400 text-slate-950'
+                : 'bg-cyan-500/20 border border-cyan-400/30 text-cyan-300'
+            }`}
+          >
             {isCompleted ? <Bell className="h-4 w-4" /> : <Timer className="h-4 w-4" />}
           </div>
           <div>
-            <h4 className="text-sm font-bold text-zinc-100">
+            <h4 className="text-sm font-bold text-white">
               {isCompleted ? '¡Tiempo de descanso cumplido!' : 'Temporizador de descanso'}
             </h4>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-slate-400 tabular-nums">
               {isCompleted ? 'Listo para la siguiente serie' : `Objetivo: ${targetSeconds}s`}
             </p>
           </div>
@@ -92,7 +99,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] hover:bg-white/[0.12] text-slate-300 cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
@@ -100,22 +107,24 @@ export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
       </div>
 
       {/* Barra de progreso */}
-      <div className="h-2 w-full rounded-full bg-zinc-950 border border-zinc-800 overflow-hidden mb-4">
+      <div className="h-2.5 w-full rounded-full bg-[#090d16] border border-white/10 overflow-hidden mb-4">
         <div
           className={`h-full transition-all duration-300 ${
-            isCompleted ? 'bg-emerald-500' : 'bg-cyan-400'
+            isCompleted
+              ? 'bg-gradient-to-r from-emerald-400 to-lime-400'
+              : 'bg-gradient-to-r from-cyan-400 to-indigo-400'
           }`}
           style={{ width: `${progressPct}%` }}
         />
       </div>
 
       {/* Reloj central */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-1.5">
           <button
             type="button"
             onClick={() => adjustSeconds(-15)}
-            className="min-h-10 px-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-xs font-bold text-zinc-300 cursor-pointer"
+            className="min-h-11 px-3 rounded-xl bg-[#090d16] hover:bg-white/[0.08] border border-white/10 text-xs font-bold text-slate-200 cursor-pointer"
             title="Restar 15 segundos"
           >
             -15s
@@ -123,16 +132,18 @@ export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
           <button
             type="button"
             onClick={() => adjustSeconds(30)}
-            className="min-h-10 px-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-xs font-bold text-zinc-300 cursor-pointer"
+            className="min-h-11 px-3 rounded-xl bg-[#090d16] hover:bg-white/[0.08] border border-white/10 text-xs font-bold text-slate-200 cursor-pointer"
             title="Sumar 30 segundos"
           >
             +30s
           </button>
         </div>
 
-        <div className={`text-3xl sm:text-4xl font-black font-mono tracking-wider ${
-          isCompleted ? 'text-emerald-400 animate-pulse' : 'text-zinc-50'
-        }`}>
+        <div
+          className={`text-3xl sm:text-4xl font-extrabold font-mono tabular-nums tracking-wider ${
+            isCompleted ? 'text-emerald-300' : 'text-white'
+          }`}
+        >
           {formatTime(secondsRemaining)}
         </div>
 
@@ -142,8 +153,8 @@ export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
             onClick={toggleRun}
             className={`flex items-center justify-center min-h-11 px-4 rounded-xl font-bold text-sm transition-colors cursor-pointer ${
               isRunning
-                ? 'bg-amber-500 hover:bg-amber-400 text-zinc-950'
-                : 'bg-emerald-500 hover:bg-emerald-400 text-zinc-950'
+                ? 'bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950'
+                : 'bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 text-slate-950'
             }`}
           >
             {isRunning ? (
@@ -159,7 +170,7 @@ export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
           <button
             type="button"
             onClick={resetTimer}
-            className="flex items-center justify-center h-11 w-11 rounded-xl bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-zinc-200 cursor-pointer"
+            className="flex items-center justify-center h-11 w-11 rounded-xl bg-[#090d16] hover:bg-white/[0.08] border border-white/10 text-slate-300 hover:text-white cursor-pointer"
             title="Reiniciar temporizador"
           >
             <RotateCcw className="h-4 w-4" />
@@ -169,4 +180,3 @@ export function RestTimer({ defaultSeconds = 90, onComplete, onClose }) {
     </div>
   )
 }
-

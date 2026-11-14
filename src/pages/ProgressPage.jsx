@@ -23,14 +23,14 @@ export function ProgressPage() {
   return (
     <div className="space-y-5">
       {/* Selector de tipo de progreso */}
-      <div className="flex items-center gap-2 p-1 rounded-2xl bg-zinc-900 border border-zinc-800 w-full sm:w-fit">
+      <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#0d1322] border border-white/10 w-full sm:w-fit">
         <button
           type="button"
           onClick={() => setSubTab('weight')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 min-h-11 px-4 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 min-h-11 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-150 whitespace-nowrap cursor-pointer ${
             subTab === 'weight'
-              ? 'bg-emerald-500 text-zinc-950 shadow-sm'
-              : 'text-zinc-400 hover:text-zinc-100'
+              ? 'bg-gradient-to-r from-cyan-400 to-indigo-400 text-slate-950 shadow-lg shadow-cyan-500/20'
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
           <Scale className="h-4 w-4" />
@@ -40,10 +40,10 @@ export function ProgressPage() {
         <button
           type="button"
           onClick={() => setSubTab('strength')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 min-h-11 px-4 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 min-h-11 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all duration-150 whitespace-nowrap cursor-pointer ${
             subTab === 'strength'
-              ? 'bg-emerald-500 text-zinc-950 shadow-sm'
-              : 'text-zinc-400 hover:text-zinc-100'
+              ? 'bg-gradient-to-r from-cyan-400 to-indigo-400 text-slate-950 shadow-lg shadow-cyan-500/20'
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
           }`}
         >
           <Dumbbell className="h-4 w-4" />
@@ -64,14 +64,16 @@ export function ProgressPage() {
           <WeightTrendChart />
 
           {/* Resumen de medias semanales */}
-          <section className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4 sm:p-5 space-y-3">
-            <div className="flex items-center gap-2">
-              <CalendarDays className="h-5 w-5 text-emerald-400" />
-              <h2 className="text-base font-bold text-zinc-50">Medias Semanales (Lunes a Domingo)</h2>
+          <section className="surface-card rounded-2xl p-4 sm:p-5 space-y-3.5">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/15 border border-cyan-400/25 text-cyan-300">
+                <CalendarDays className="h-4.5 w-4.5" />
+              </div>
+              <h2 className="text-base font-bold text-white">Medias Semanales (Lunes a Domingo)</h2>
             </div>
 
             {weeklySummariesDesc.length === 0 ? (
-              <p className="text-xs text-zinc-500 py-2">
+              <p className="text-xs text-slate-400 py-2">
                 Las medias semanales aparecerán aquí en cuanto registres tu primer peso.
               </p>
             ) : (
@@ -79,26 +81,26 @@ export function ProgressPage() {
                 {weeklySummariesDesc.map((week) => (
                   <div
                     key={week.key}
-                    className="rounded-xl bg-zinc-950 border border-zinc-800 p-3.5 space-y-1.5"
+                    className="rounded-xl bg-[#090d16] border border-white/10 p-3.5 space-y-1.5"
                   >
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-zinc-200">
-                        Semana {week.weekNo} ({week.isoYear})
+                      <span className="font-bold text-slate-200">
+                        Semana {week.weekNo} · {week.isoYear}
                       </span>
-                      <span className="text-zinc-500">{week.count} reg.</span>
+                      <span className="text-slate-400 tabular-nums">{week.count} reg.</span>
                     </div>
                     <div className="flex items-baseline justify-between">
-                      <span className="text-xl font-extrabold text-emerald-400">
+                      <span className="font-mono tabular-nums text-xl font-extrabold text-cyan-300">
                         {week.averageKg.toFixed(2)} kg
                       </span>
                       {week.deltaKg !== null && (
                         <span
-                          className={`text-xs font-semibold ${
+                          className={`font-mono tabular-nums text-xs font-semibold ${
                             week.deltaKg < 0
                               ? 'text-emerald-400'
                               : week.deltaKg > 0
                                 ? 'text-amber-400'
-                                : 'text-zinc-400'
+                                : 'text-slate-400'
                           }`}
                         >
                           {week.deltaKg > 0 ? '+' : ''}
@@ -106,7 +108,7 @@ export function ProgressPage() {
                         </span>
                       )}
                     </div>
-                    <div className="text-[11px] text-zinc-500">
+                    <div className="text-[11px] text-slate-400 tabular-nums">
                       {formatShortDateES(week.startDate)} – {formatShortDateES(week.endDate)} · Rango{' '}
                       {week.minKg.toFixed(1)}–{week.maxKg.toFixed(1)} kg
                     </div>
@@ -117,18 +119,18 @@ export function ProgressPage() {
           </section>
 
           {/* Historial diario */}
-          <section className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4 sm:p-5 space-y-3">
+          <section className="surface-card rounded-2xl p-4 sm:p-5 space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-bold text-zinc-50">Historial de Pesajes</h2>
-              <span className="text-xs text-zinc-400">{sortedDesc.length} registros</span>
+              <h2 className="text-base font-bold text-white">Historial de Pesajes</h2>
+              <span className="text-xs text-slate-400 tabular-nums">{sortedDesc.length} registros</span>
             </div>
 
             {sortedDesc.length === 0 ? (
-              <p className="text-xs text-zinc-500 py-3">
+              <p className="text-xs text-slate-400 py-3">
                 No hay registros todavía. Añade tu peso en ayunas arriba para empezar.
               </p>
             ) : (
-              <div className="divide-y divide-zinc-800/80">
+              <div className="divide-y divide-white/10">
                 {sortedDesc.map((entry) => {
                   const isConfirming = confirmDeleteId === entry.id
                   return (
@@ -138,15 +140,15 @@ export function ProgressPage() {
                     >
                       <div className="min-w-0">
                         <div className="flex items-baseline gap-2.5">
-                          <span className="text-base font-extrabold text-zinc-50">
+                          <span className="font-mono tabular-nums text-base font-extrabold text-white">
                             {entry.weightKg.toFixed(1)} kg
                           </span>
-                          <span className="text-xs text-zinc-400 capitalize truncate">
+                          <span className="text-xs text-slate-400 capitalize truncate">
                             {formatFullDateES(entry.date)}
                           </span>
                         </div>
                         {entry.note && (
-                          <p className="text-xs text-zinc-500 truncate mt-0.5">{entry.note}</p>
+                          <p className="text-xs text-slate-400 truncate mt-0.5">{entry.note}</p>
                         )}
                       </div>
 
@@ -155,7 +157,7 @@ export function ProgressPage() {
                           type="button"
                           onClick={() => handleEdit(entry)}
                           aria-label={`Editar pesaje del ${entry.date}`}
-                          className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 cursor-pointer"
+                          className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-slate-300 transition-colors cursor-pointer"
                         >
                           <Pencil className="h-4 w-4" />
                         </button>
@@ -177,7 +179,7 @@ export function ProgressPage() {
                             type="button"
                             onClick={() => setConfirmDeleteId(entry.id)}
                             aria-label={`Eliminar pesaje del ${entry.date}`}
-                            className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-rose-400 cursor-pointer"
+                            className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#090d16] hover:bg-rose-500/15 border border-white/10 text-slate-400 hover:text-rose-300 transition-colors cursor-pointer"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>

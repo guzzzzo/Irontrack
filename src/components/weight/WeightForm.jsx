@@ -70,18 +70,18 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4 sm:p-5 space-y-4"
+      className="surface-card rounded-2xl p-4 sm:p-5 space-y-4"
     >
       <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/25 to-indigo-500/20 border border-cyan-400/30 text-cyan-300">
             <Scale className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-zinc-50">
+            <h2 className="text-base font-bold text-white">
               {editingEntry ? 'Editar registro de peso' : 'Registrar peso corporal'}
             </h2>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-slate-400">
               Recomendado pesarse en ayunas para calcular medias fiables
             </p>
           </div>
@@ -96,7 +96,7 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
               setNote('En ayunas')
               onCancelEdit?.()
             }}
-            className="flex items-center gap-1 min-h-9 px-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-200 cursor-pointer"
+            className="flex items-center gap-1 min-h-9 px-3 rounded-lg bg-white/[0.08] hover:bg-white/[0.14] text-xs font-semibold text-slate-200 cursor-pointer"
           >
             <X className="h-3.5 w-3.5" />
             Cancelar
@@ -107,18 +107,18 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Fecha */}
         <div className="space-y-1.5">
-          <label htmlFor="bw-date" className="block text-xs font-semibold uppercase tracking-wide text-zinc-400">
+          <label htmlFor="bw-date" className="block text-xs font-semibold text-slate-300">
             Fecha
           </label>
           <div className="relative">
-            <Calendar className="h-4 w-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Calendar className="h-4 w-4 text-cyan-300 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               id="bw-date"
               type="date"
               value={date}
               max={getTodayISO()}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full min-h-12 pl-10 pr-3 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none text-sm font-medium text-zinc-100"
+              className="w-full min-h-12 pl-10 pr-3 rounded-xl bg-[#090d16] border border-white/10 focus:border-cyan-400 focus:outline-none text-sm font-medium text-white"
               required
             />
           </div>
@@ -126,14 +126,14 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
 
         {/* Peso con controles rápidos para una mano */}
         <div className="space-y-1.5">
-          <label htmlFor="bw-kg" className="block text-xs font-semibold uppercase tracking-wide text-zinc-400">
+          <label htmlFor="bw-kg" className="block text-xs font-semibold text-slate-300">
             Peso (kg)
           </label>
           <div className="flex items-center gap-1.5">
             <button
               type="button"
               onClick={() => adjustWeight(-0.5)}
-              className="min-h-12 px-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-xs font-bold text-zinc-200 cursor-pointer"
+              className="min-h-12 px-2.5 rounded-xl bg-white/[0.07] hover:bg-white/[0.14] text-xs font-bold text-slate-200 transition-colors cursor-pointer"
               aria-label="Restar 0.5 kg"
             >
               -0.5
@@ -141,7 +141,7 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
             <button
               type="button"
               onClick={() => adjustWeight(-0.1)}
-              className="flex items-center justify-center min-h-12 w-11 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-zinc-100 cursor-pointer"
+              className="flex items-center justify-center min-h-12 w-11 rounded-xl bg-white/[0.07] hover:bg-white/[0.14] text-white transition-colors cursor-pointer"
               aria-label="Restar 0.1 kg"
             >
               <Minus className="h-4 w-4" />
@@ -155,13 +155,13 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
               inputMode="decimal"
               value={weightInput}
               onChange={(e) => setWeightInput(e.target.value)}
-              className="flex-1 min-w-0 min-h-12 px-2 text-center rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none text-lg font-bold text-zinc-50"
+              className="flex-1 min-w-0 min-h-12 px-2 text-center rounded-xl bg-[#090d16] border border-white/10 focus:border-cyan-400 focus:outline-none font-mono tabular-nums text-lg font-extrabold text-white"
               required
             />
             <button
               type="button"
               onClick={() => adjustWeight(0.1)}
-              className="flex items-center justify-center min-h-12 w-11 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-zinc-100 cursor-pointer"
+              className="flex items-center justify-center min-h-12 w-11 rounded-xl bg-white/[0.07] hover:bg-white/[0.14] text-white transition-colors cursor-pointer"
               aria-label="Sumar 0.1 kg"
             >
               <Plus className="h-4 w-4" />
@@ -169,7 +169,7 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
             <button
               type="button"
               onClick={() => adjustWeight(0.5)}
-              className="min-h-12 px-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 text-xs font-bold text-zinc-200 cursor-pointer"
+              className="min-h-12 px-2.5 rounded-xl bg-white/[0.07] hover:bg-white/[0.14] text-xs font-bold text-slate-200 transition-colors cursor-pointer"
               aria-label="Sumar 0.5 kg"
             >
               +0.5
@@ -180,7 +180,7 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
 
       {/* Nota y etiquetas rápidas */}
       <div className="space-y-2">
-        <label htmlFor="bw-note" className="block text-xs font-semibold uppercase tracking-wide text-zinc-400">
+        <label htmlFor="bw-note" className="block text-xs font-semibold text-slate-300">
           Nota opcional
         </label>
         <input
@@ -189,7 +189,7 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Ej. En ayunas tras dormir 7h"
-          className="w-full min-h-11 px-3.5 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none text-sm text-zinc-100 placeholder:text-zinc-600"
+          className="w-full min-h-11 px-3.5 rounded-xl bg-[#090d16] border border-white/10 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder:text-slate-500"
         />
         <div className="flex flex-wrap gap-1.5">
           {QUICK_NOTES.map((chip) => (
@@ -197,10 +197,10 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
               key={chip}
               type="button"
               onClick={() => setNote(chip)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${
+              className={`min-h-9 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
                 note === chip
-                  ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300'
-                  : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-cyan-500/20 border-cyan-400/50 text-cyan-200'
+                  : 'bg-[#090d16] border-white/10 text-slate-400 hover:text-slate-100'
               }`}
             >
               {chip}
@@ -210,7 +210,7 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
       </div>
 
       {isUpdatingExisting && !editingEntry && (
-        <p className="text-xs text-amber-300/90 bg-amber-500/10 border border-amber-500/25 rounded-xl px-3 py-2">
+        <p className="text-xs text-amber-200 bg-amber-500/15 border border-amber-400/30 rounded-xl px-3.5 py-2.5">
           Ya existe un pesaje en {date} ({existingSameDate.weightKg.toFixed(1)} kg). Al guardar se
           actualizará ese día sin duplicarlo.
         </p>
@@ -218,10 +218,10 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
 
       {statusMsg && (
         <p
-          className={`text-xs rounded-xl px-3 py-2 border ${
+          className={`text-xs rounded-xl px-3.5 py-2.5 border ${
             statusMsg.type === 'success'
-              ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
-              : 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+              ? 'bg-emerald-500/15 border-emerald-400/35 text-emerald-200'
+              : 'bg-rose-500/15 border-rose-400/35 text-rose-200'
           }`}
         >
           {statusMsg.text}
@@ -230,7 +230,7 @@ export function WeightForm({ editingEntry, onCancelEdit, onSaved }) {
 
       <button
         type="submit"
-        className="w-full flex items-center justify-center gap-2 min-h-12 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-bold text-sm transition-colors cursor-pointer"
+        className="w-full flex items-center justify-center gap-2 min-h-12 px-5 rounded-xl bg-gradient-to-r from-cyan-400 to-indigo-400 hover:from-cyan-300 hover:to-indigo-300 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/20 transition-all cursor-pointer"
       >
         <Check className="h-4 w-4" />
         <span>

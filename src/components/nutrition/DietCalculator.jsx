@@ -77,16 +77,16 @@ export function DietCalculator() {
     <div className="space-y-5">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Panel izquierdo: parámetros del usuario */}
-        <div className="lg:col-span-7 rounded-2xl bg-zinc-900 border border-zinc-800 p-4 sm:p-5 space-y-5">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/15 text-amber-400">
+        <div className="lg:col-span-7 surface-card rounded-2xl p-4 sm:p-5 space-y-5">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500/25 to-amber-500/20 border border-rose-400/30 text-rose-300">
               <Calculator className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-zinc-50">
+              <h2 className="text-base font-bold text-white">
                 Calculadora TMB, GET y Macros
               </h2>
-              <p className="text-xs text-zinc-400">
+              <p className="text-xs text-slate-400">
                 Fórmula Mifflin-St Jeor adaptada a tu gasto y objetivo
               </p>
             </div>
@@ -94,7 +94,7 @@ export function DietCalculator() {
 
           {/* Sexo */}
           <div className="space-y-2">
-            <span className="block text-xs font-semibold uppercase tracking-wide text-zinc-400">
+            <span className="block text-xs font-semibold text-slate-300">
               Sexo biológico (para fórmula TMB)
             </span>
             <div className="grid grid-cols-2 gap-2.5">
@@ -109,10 +109,10 @@ export function DietCalculator() {
                     updateProfile({ sex: opt.id })
                     setAppliedBanner(false)
                   }}
-                  className={`min-h-12 rounded-xl border text-sm font-semibold transition-colors cursor-pointer ${
+                  className={`min-h-12 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${
                     profile.sex === opt.id
-                      ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-300'
-                      : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                      ? 'bg-gradient-to-r from-rose-500/20 to-amber-500/15 border-rose-400/50 text-rose-200'
+                      : 'bg-[#090d16] border-white/10 text-slate-400 hover:text-slate-100'
                   }`}
                 >
                   {opt.label}
@@ -126,7 +126,7 @@ export function DietCalculator() {
             <div className="space-y-1.5">
               <label
                 htmlFor="calc-age"
-                className="block text-xs font-semibold uppercase tracking-wide text-zinc-400"
+                className="block text-xs font-semibold text-slate-300"
               >
                 Edad
               </label>
@@ -141,14 +141,14 @@ export function DietCalculator() {
                 onBlur={() =>
                   handleDraftBlur('age', ageDraft, setAgeDraft, 14, 100, profile.age)
                 }
-                className="w-full min-h-12 px-3 text-center rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none text-base font-bold text-zinc-50"
+                className="w-full min-h-12 px-3 text-center rounded-xl bg-[#090d16] border border-white/10 focus:border-rose-400 focus:outline-none font-mono tabular-nums text-base font-bold text-white"
               />
             </div>
 
             <div className="space-y-1.5">
               <label
                 htmlFor="calc-height"
-                className="block text-xs font-semibold uppercase tracking-wide text-zinc-400"
+                className="block text-xs font-semibold text-slate-300"
               >
                 Altura (cm)
               </label>
@@ -172,14 +172,14 @@ export function DietCalculator() {
                     profile.heightCm
                   )
                 }
-                className="w-full min-h-12 px-3 text-center rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none text-base font-bold text-zinc-50"
+                className="w-full min-h-12 px-3 text-center rounded-xl bg-[#090d16] border border-white/10 focus:border-rose-400 focus:outline-none font-mono tabular-nums text-base font-bold text-white"
               />
             </div>
 
             <div className="space-y-1.5">
               <label
                 htmlFor="calc-weight"
-                className="block text-xs font-semibold uppercase tracking-wide text-zinc-400"
+                className="block text-xs font-semibold text-slate-300"
               >
                 Peso (kg)
               </label>
@@ -204,7 +204,7 @@ export function DietCalculator() {
                     profile.weightKg
                   )
                 }
-                className="w-full min-h-12 px-3 text-center rounded-xl bg-zinc-950 border border-zinc-800 focus:border-emerald-500 focus:outline-none text-base font-bold text-zinc-50"
+                className="w-full min-h-12 px-3 text-center rounded-xl bg-[#090d16] border border-white/10 focus:border-rose-400 focus:outline-none font-mono tabular-nums text-base font-bold text-white"
               />
             </div>
           </div>
@@ -216,7 +216,7 @@ export function DietCalculator() {
                 updateProfile({ weightKg: latestWeight })
                 setAppliedBanner(false)
               }}
-              className="w-full flex items-center justify-center gap-2 min-h-10 px-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-semibold cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 min-h-11 px-3 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/35 text-cyan-200 text-xs font-semibold transition-colors cursor-pointer"
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>Usar último peso corporal registrado ({latestWeight.toFixed(1)} kg)</span>
@@ -225,7 +225,7 @@ export function DietCalculator() {
 
           {/* Factor de actividad física */}
           <div className="space-y-2">
-            <span className="block text-xs font-semibold uppercase tracking-wide text-zinc-400">
+            <span className="block text-xs font-semibold text-slate-300">
               Nivel de actividad física (GET)
             </span>
             <div className="space-y-2">
@@ -241,17 +241,17 @@ export function DietCalculator() {
                     }}
                     className={`w-full flex items-center justify-between gap-3 px-3.5 py-3 rounded-xl border text-left transition-colors cursor-pointer ${
                       active
-                        ? 'bg-emerald-500/12 border-emerald-500/45 text-zinc-50'
-                        : 'bg-zinc-950 border-zinc-800/90 text-zinc-300 hover:border-zinc-700'
+                        ? 'bg-gradient-to-r from-rose-500/15 to-amber-500/10 border-rose-400/45 text-white'
+                        : 'bg-[#090d16] border-white/10 text-slate-300 hover:border-white/20'
                     }`}
                   >
                     <div className="min-w-0">
                       <div className="text-sm font-semibold">{lvl.label}</div>
-                      <div className="text-xs text-zinc-400 truncate">{lvl.description}</div>
+                      <div className="text-xs text-slate-400 truncate">{lvl.description}</div>
                     </div>
                     <span
-                      className={`shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold ${
-                        active ? 'bg-emerald-500/20 text-emerald-300' : 'bg-zinc-800 text-zinc-400'
+                      className={`shrink-0 font-mono tabular-nums px-2.5 py-1 rounded-lg text-xs font-bold ${
+                        active ? 'bg-rose-500/25 text-rose-200' : 'bg-white/[0.06] text-slate-400'
                       }`}
                     >
                       ×{lvl.factor}
@@ -264,7 +264,7 @@ export function DietCalculator() {
 
           {/* Selector de objetivo */}
           <div className="space-y-2.5">
-            <span className="block text-xs font-semibold uppercase tracking-wide text-zinc-400">
+            <span className="block text-xs font-semibold text-slate-300">
               Objetivo nutricional
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -277,22 +277,22 @@ export function DietCalculator() {
                     onClick={() => handleGoalSelect(goal)}
                     className={`p-3 rounded-xl border text-left transition-colors cursor-pointer ${
                       active
-                        ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-200'
-                        : 'bg-zinc-950 border-zinc-800 text-zinc-300 hover:border-zinc-700'
+                        ? 'bg-gradient-to-br from-rose-500/20 to-amber-500/10 border-rose-400/50 text-rose-100'
+                        : 'bg-[#090d16] border-white/10 text-slate-300 hover:border-white/20'
                     }`}
                   >
                     <div className="text-sm font-bold">{goal.label}</div>
-                    <div className="text-xs text-zinc-400 mt-0.5">{goal.shortLabel}</div>
+                    <div className="text-xs text-slate-400 mt-0.5">{goal.shortLabel}</div>
                   </button>
                 )
               })}
             </div>
 
             {/* Ajuste fino del porcentaje calórico */}
-            <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3.5 space-y-3">
+            <div className="rounded-xl bg-[#090d16] border border-white/10 p-3.5 space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-zinc-400">Ajuste sobre GET</span>
-                <span className="font-bold text-zinc-100">
+                <span className="text-slate-400">Ajuste sobre GET</span>
+                <span className="font-mono tabular-nums font-bold text-rose-300">
                   {profile.goalAdjustmentPct > 0 ? '+' : ''}
                   {profile.goalAdjustmentPct}%
                 </span>
@@ -306,10 +306,10 @@ export function DietCalculator() {
                       updateProfile({ goalAdjustmentPct: pct })
                       setAppliedBanner(false)
                     }}
-                    className={`min-h-9 px-3 rounded-lg text-xs font-semibold border cursor-pointer ${
+                    className={`min-h-9 px-3 rounded-lg font-mono tabular-nums text-xs font-bold border transition-colors cursor-pointer ${
                       profile.goalAdjustmentPct === pct
-                        ? 'bg-emerald-500 text-zinc-950 border-emerald-400'
-                        : 'bg-zinc-900 text-zinc-300 border-zinc-700 hover:bg-zinc-800'
+                        ? 'bg-gradient-to-r from-rose-500 to-amber-400 text-slate-950 border-transparent'
+                        : 'bg-[#0f172a] text-slate-300 border-white/10 hover:bg-white/[0.08]'
                     }`}
                   >
                     {pct > 0 ? `+${pct}%` : `${pct}%`}
@@ -327,22 +327,22 @@ export function DietCalculator() {
                   setAppliedBanner(false)
                 }}
                 aria-label="Porcentaje de ajuste calórico"
-                className="w-full accent-emerald-500 cursor-pointer"
+                className="w-full accent-rose-400 cursor-pointer"
               />
             </div>
           </div>
 
           {/* Reparto de macronutrientes */}
           <div className="space-y-3 pt-1">
-            <span className="block text-xs font-semibold uppercase tracking-wide text-zinc-400">
+            <span className="block text-xs font-semibold text-slate-300">
               Reparto automático de macros (g/kg)
             </span>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3.5 space-y-2">
+              <div className="rounded-xl bg-[#090d16] border border-cyan-500/25 p-3.5 space-y-2">
                 <div className="flex justify-between text-xs">
-                  <span className="text-zinc-300 font-medium">Proteína</span>
-                  <span className="font-bold text-cyan-400">{profile.proteinPerKg} g/kg</span>
+                  <span className="text-slate-200 font-medium">Proteína</span>
+                  <span className="font-mono tabular-nums font-bold text-cyan-300">{profile.proteinPerKg} g/kg</span>
                 </div>
                 <input
                   type="range"
@@ -357,13 +357,13 @@ export function DietCalculator() {
                   aria-label="Gramos de proteína por kilogramo"
                   className="w-full accent-cyan-400 cursor-pointer"
                 />
-                <div className="text-[11px] text-zinc-500">Recomendado fuerza: 1.8 – 2.2 g/kg</div>
+                <div className="text-[11px] text-slate-400">Recomendado fuerza: 1.8 – 2.2 g/kg</div>
               </div>
 
-              <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3.5 space-y-2">
+              <div className="rounded-xl bg-[#090d16] border border-amber-500/25 p-3.5 space-y-2">
                 <div className="flex justify-between text-xs">
-                  <span className="text-zinc-300 font-medium">Grasas esenciales</span>
-                  <span className="font-bold text-amber-400">{profile.fatPerKg} g/kg</span>
+                  <span className="text-slate-200 font-medium">Grasas esenciales</span>
+                  <span className="font-mono tabular-nums font-bold text-amber-300">{profile.fatPerKg} g/kg</span>
                 </div>
                 <input
                   type="range"
@@ -378,7 +378,7 @@ export function DietCalculator() {
                   aria-label="Gramos de grasa por kilogramo"
                   className="w-full accent-amber-400 cursor-pointer"
                 />
-                <div className="text-[11px] text-zinc-500">Salud hormonal: 0.7 – 1.0 g/kg</div>
+                <div className="text-[11px] text-slate-400">Salud hormonal: 0.7 – 1.0 g/kg</div>
               </div>
             </div>
           </div>
@@ -386,43 +386,43 @@ export function DietCalculator() {
 
         {/* Panel derecho: Resultados calculados y Aplicar objetivo */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4 sm:p-5 space-y-5 lg:sticky lg:top-22">
+          <div className="surface-card rounded-2xl p-4 sm:p-5 space-y-5 lg:sticky lg:top-20">
             <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <Flame className="h-5 w-5 text-emerald-400" />
-                <h3 className="text-base font-bold text-zinc-50">Resultado Metabólico</h3>
+              <div className="flex items-center gap-2.5">
+                <Flame className="h-5 w-5 text-rose-400" />
+                <h3 className="text-base font-bold text-white">Resultado Metabólico</h3>
               </div>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-300 font-medium">
+              <span className="text-xs font-semibold text-rose-300">
                 {selectedGoalObj.label}
               </span>
             </div>
 
             {/* TMB y GET */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3.5">
-                <div className="text-xs text-zinc-400">TMB (Basal)</div>
-                <div className="text-xl font-extrabold text-zinc-100 mt-0.5">
-                  {plan.bmr} <span className="text-xs font-normal text-zinc-500">kcal</span>
+              <div className="rounded-xl bg-[#090d16] border border-white/10 p-3.5">
+                <div className="text-xs text-slate-400">TMB (Basal)</div>
+                <div className="font-mono tabular-nums text-xl font-extrabold text-white mt-0.5">
+                  {plan.bmr} <span className="text-xs font-normal text-slate-400">kcal</span>
                 </div>
               </div>
-              <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3.5">
-                <div className="text-xs text-zinc-400">GET (Mantenimiento)</div>
-                <div className="text-xl font-extrabold text-zinc-100 mt-0.5">
-                  {plan.tdee} <span className="text-xs font-normal text-zinc-500">kcal</span>
+              <div className="rounded-xl bg-[#090d16] border border-white/10 p-3.5">
+                <div className="text-xs text-slate-400">GET (Mantenimiento)</div>
+                <div className="font-mono tabular-nums text-xl font-extrabold text-white mt-0.5">
+                  {plan.tdee} <span className="text-xs font-normal text-slate-400">kcal</span>
                 </div>
               </div>
             </div>
 
             {/* Calorías objetivo */}
-            <div className="rounded-2xl bg-gradient-to-br from-emerald-500/15 via-zinc-950 to-zinc-950 border border-emerald-500/35 p-4 text-center">
-              <div className="text-xs font-semibold uppercase tracking-wider text-emerald-300">
+            <div className="rounded-2xl bg-gradient-to-br from-rose-500/20 via-orange-500/10 to-[#090d16] border border-rose-400/35 p-4 text-center">
+              <div className="text-xs font-semibold text-rose-200">
                 Objetivo diario calculado
               </div>
-              <div className="text-4xl font-black text-zinc-50 mt-1">
+              <div className="font-mono tabular-nums text-4xl font-extrabold text-white mt-1">
                 {plan.targetCalories}{' '}
-                <span className="text-base font-semibold text-zinc-400">kcal/día</span>
+                <span className="text-base font-semibold text-slate-300">kcal/día</span>
               </div>
-              <div className="text-xs text-zinc-400 mt-1">
+              <div className="text-xs text-slate-300 mt-1 tabular-nums">
                 {plan.goalAdjustmentPct === 0
                   ? 'Equilibrio calórico (0% sobre GET)'
                   : `${plan.goalAdjustmentPct > 0 ? '+' : ''}${plan.goalAdjustmentPct}% respecto a tu GET (${plan.targetCalories - plan.tdee > 0 ? '+' : ''}${plan.targetCalories - plan.tdee} kcal)`}
@@ -430,8 +430,8 @@ export function DietCalculator() {
             </div>
 
             {/* Barra de proporción de macros */}
-            <div className="space-y-2">
-              <div className="flex h-3 w-full overflow-hidden rounded-full bg-zinc-950 border border-zinc-800">
+            <div className="space-y-2.5">
+              <div className="flex h-3.5 w-full overflow-hidden rounded-full bg-[#090d16] border border-white/10">
                 <div
                   style={{ width: `${plan.proteinPct}%` }}
                   className="bg-cyan-400 transition-all"
@@ -450,37 +450,41 @@ export function DietCalculator() {
               </div>
 
               <div className="grid grid-cols-3 gap-2.5 pt-1">
-                <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3 text-center">
-                  <div className="text-[11px] font-semibold text-cyan-400">Proteínas</div>
-                  <div className="text-lg font-extrabold text-zinc-50 mt-0.5">
+                <div className="rounded-xl bg-[#090d16] border border-cyan-500/25 p-3 text-center">
+                  <div className="text-[11px] font-bold text-cyan-300">Proteínas</div>
+                  <div className="font-mono tabular-nums text-lg font-extrabold text-white mt-0.5">
                     {plan.proteinG}g
                   </div>
-                  <div className="text-[11px] text-zinc-500">
-                    {plan.proteinKcal} kcal ({plan.proteinPct}%)
+                  <div className="text-[11px] text-slate-400 tabular-nums">
+                    {plan.proteinKcal} kcal · {plan.proteinPct}%
                   </div>
                 </div>
 
-                <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3 text-center">
-                  <div className="text-[11px] font-semibold text-emerald-400">Carbos</div>
-                  <div className="text-lg font-extrabold text-zinc-50 mt-0.5">{plan.carbsG}g</div>
-                  <div className="text-[11px] text-zinc-500">
-                    {plan.carbsKcal} kcal ({plan.carbsPct}%)
+                <div className="rounded-xl bg-[#090d16] border border-emerald-500/25 p-3 text-center">
+                  <div className="text-[11px] font-bold text-emerald-300">Carbos</div>
+                  <div className="font-mono tabular-nums text-lg font-extrabold text-white mt-0.5">
+                    {plan.carbsG}g
+                  </div>
+                  <div className="text-[11px] text-slate-400 tabular-nums">
+                    {plan.carbsKcal} kcal · {plan.carbsPct}%
                   </div>
                 </div>
 
-                <div className="rounded-xl bg-zinc-950 border border-zinc-800 p-3 text-center">
-                  <div className="text-[11px] font-semibold text-amber-400">Grasas</div>
-                  <div className="text-lg font-extrabold text-zinc-50 mt-0.5">{plan.fatsG}g</div>
-                  <div className="text-[11px] text-zinc-500">
-                    {plan.fatsKcal} kcal ({plan.fatsPct}%)
+                <div className="rounded-xl bg-[#090d16] border border-amber-500/25 p-3 text-center">
+                  <div className="text-[11px] font-bold text-amber-300">Grasas</div>
+                  <div className="font-mono tabular-nums text-lg font-extrabold text-white mt-0.5">
+                    {plan.fatsG}g
+                  </div>
+                  <div className="text-[11px] text-slate-400 tabular-nums">
+                    {plan.fatsKcal} kcal · {plan.fatsPct}%
                   </div>
                 </div>
               </div>
             </div>
 
             {(plan.lowCalorieWarning || plan.carbsOverflow) && (
-              <div className="flex items-start gap-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 p-3 text-xs text-amber-200">
-                <AlertTriangle className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 rounded-xl bg-amber-500/15 border border-amber-400/35 p-3 text-xs text-amber-100">
+                <AlertTriangle className="h-4 w-4 text-amber-300 shrink-0 mt-0.5" />
                 <div>
                   {plan.carbsOverflow
                     ? 'Proteínas y grasas superan el presupuesto calórico; los carbohidratos quedaron en 0 g. Reduce g/kg o suaviza el déficit.'
@@ -492,10 +496,10 @@ export function DietCalculator() {
             <button
               type="button"
               onClick={handleApplyTargets}
-              className={`w-full flex items-center justify-center gap-2 min-h-13 px-5 rounded-xl font-bold text-sm transition-all cursor-pointer ${
+              className={`w-full flex items-center justify-center gap-2 min-h-12 px-5 rounded-xl font-bold text-sm transition-all cursor-pointer ${
                 isAlreadySynced
-                  ? 'bg-zinc-800 border border-emerald-500/40 text-emerald-300'
-                  : 'bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 shadow-lg shadow-emerald-500/10'
+                  ? 'bg-emerald-500/15 border border-emerald-400/40 text-emerald-200'
+                  : 'bg-gradient-to-r from-rose-500 to-amber-400 hover:from-rose-400 hover:to-amber-300 text-slate-950 shadow-lg shadow-rose-500/20'
               }`}
             >
               {isAlreadySynced ? (
@@ -512,7 +516,7 @@ export function DietCalculator() {
             </button>
 
             {appliedBanner && (
-              <p className="text-xs text-center text-emerald-400">
+              <p className="text-xs text-center text-emerald-300">
                 Guardado en localStorage y sincronizado con el Dashboard y el Diario.
               </p>
             )}

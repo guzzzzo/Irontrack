@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
 import { exercisesDB } from '../../data/exercisesDB'
 import { useApp } from '../../context/AppContext'
-import { formatFullDateES, roundTo } from '../../utils/calculations'
-import { Calendar, ChevronDown, ChevronUp, Dumbbell, History, Trash2, Trophy } from 'lucide-react'
+import { formatFullDateES } from '../../utils/calculations'
+import { ChevronDown, ChevronUp, History, Trash2, Trophy } from 'lucide-react'
 
 export function WorkoutHistory() {
   const { state, deleteWorkoutSession } = useApp()
@@ -33,12 +33,12 @@ export function WorkoutHistory() {
 
   if (sortedSessions.length === 0) {
     return (
-      <section className="rounded-2xl bg-zinc-900 border border-zinc-800 p-8 text-center space-y-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-zinc-800 text-zinc-500 mx-auto">
+      <section className="surface-card rounded-2xl p-8 text-center space-y-3">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500/15 border border-orange-400/30 text-orange-300 mx-auto">
           <History className="h-6 w-6" />
         </div>
-        <h3 className="text-base font-bold text-zinc-100">Sin historial de entrenamientos todavía</h3>
-        <p className="text-xs text-zinc-400 max-w-sm mx-auto">
+        <h3 className="text-base font-bold text-white">Sin historial de entrenamientos todavía</h3>
+        <p className="text-xs text-slate-400 max-w-sm mx-auto">
           Inicia un entrenamiento en la pestaña &quot;Entrenar&quot; y haz clic en &quot;Finalizar entreno&quot; para registrar tu primera sesión aquí.
         </p>
       </section>
@@ -49,8 +49,8 @@ export function WorkoutHistory() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-bold text-zinc-50">Historial de Entrenamientos</h2>
-          <p className="text-xs text-zinc-400">
+          <h2 className="text-lg font-bold text-white">Historial de Entrenamientos</h2>
+          <p className="text-xs text-slate-400 tabular-nums">
             {sortedSessions.length} sesión{sortedSessions.length === 1 ? '' : 'es'} registrada{sortedSessions.length === 1 ? '' : 's'}
           </p>
         </div>
@@ -77,32 +77,32 @@ export function WorkoutHistory() {
           return (
             <div
               key={session.id}
-              className="rounded-2xl bg-zinc-900 border border-zinc-800 overflow-hidden transition-all"
+              className="surface-card rounded-2xl overflow-hidden transition-all"
             >
               <div
                 onClick={() => toggleExpand(session.id)}
-                className="p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3 cursor-pointer hover:bg-zinc-850/50"
+                className="p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3 cursor-pointer hover:bg-white/[0.03]"
               >
                 <div className="flex items-start gap-3 min-w-0">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400 mt-0.5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500/25 to-amber-500/20 border border-orange-400/30 text-amber-300 mt-0.5">
                     <Trophy className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-base font-bold text-zinc-100 truncate">
+                    <h3 className="text-base font-bold text-white truncate">
                       {session.templateName || 'Entrenamiento libre'}
                     </h3>
-                    <div className="flex items-center gap-2 text-xs text-zinc-400 mt-0.5">
+                    <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
                       <span className="capitalize">{formatFullDateES(session.date)}</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="text-right">
-                    <div className="text-sm font-black text-emerald-400">
+                  <div className="text-right tabular-nums">
+                    <div className="font-mono text-sm font-extrabold text-orange-300">
                       {totalKg.toLocaleString('es-ES')} kg
                     </div>
-                    <div className="text-xs text-zinc-500">{setsCount} series</div>
+                    <div className="text-xs text-slate-400">{setsCount} series</div>
                   </div>
 
                   <div className="flex items-center gap-1.5">
@@ -125,14 +125,14 @@ export function WorkoutHistory() {
                           e.stopPropagation()
                           setConfirmDeleteId(session.id)
                         }}
-                        className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-950 hover:bg-zinc-800 text-zinc-400 hover:text-rose-400 cursor-pointer"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#090d16] hover:bg-rose-500/15 text-slate-400 hover:text-rose-300 cursor-pointer"
                         title="Eliminar sesión del historial"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
                     )}
 
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-950 text-zinc-400">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#090d16] text-slate-300">
                       {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                     </div>
                   </div>
@@ -141,36 +141,36 @@ export function WorkoutHistory() {
 
               {/* Detalle desplegable de las series del entrenamiento */}
               {isExpanded && (
-                <div className="p-4 sm:p-5 pt-0 border-t border-zinc-800/80 space-y-3 bg-zinc-950/40">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 pt-3">
-                    Desglose de ejercicios y series:
+                <div className="p-4 sm:p-5 pt-0 border-t border-white/10 space-y-3 bg-[#090d16]/70">
+                  <h4 className="text-xs font-semibold text-cyan-300 pt-3">
+                    Desglose de ejercicios y series
                   </h4>
                   <div className="space-y-3">
                     {Object.entries(setsByExercise).map(([exId, exSets]) => {
                       const exerciseInfo = exerciseMap.get(exId)
                       return (
-                        <div key={exId} className="rounded-xl bg-zinc-950 border border-zinc-800 p-3 space-y-2">
+                        <div key={exId} className="rounded-xl bg-[#0e1526] border border-white/10 p-3.5 space-y-2">
                           <div className="flex items-center justify-between">
-                            <span className="text-xs font-bold text-zinc-200">
+                            <span className="text-xs font-bold text-white">
                               {exerciseInfo?.name || exId}
                             </span>
-                            <span className="text-[11px] text-zinc-500">
+                            <span className="text-[11px] text-orange-300 font-semibold">
                               {exerciseInfo?.primaryMuscle || 'Ejercicio'}
                             </span>
                           </div>
-                          <div className="space-y-1">
+                          <div className="divide-y divide-white/[0.06]">
                             {exSets.map((s, sIdx) => (
                               <div
                                 key={s.id || sIdx}
-                                className="flex items-center justify-between text-xs py-1 px-2 rounded-lg bg-zinc-900/60"
+                                className="flex items-center justify-between text-xs py-1.5"
                               >
-                                <span className="text-zinc-400">Serie {s.setNumber || sIdx + 1}</span>
-                                <div className="flex items-center gap-2">
-                                  <strong className="text-zinc-100">{s.weightKg} kg × {s.reps} reps</strong>
-                                  <span className="text-zinc-500">(RIR {s.rir})</span>
+                                <span className="text-slate-400">Serie {s.setNumber || sIdx + 1}</span>
+                                <div className="flex items-center gap-2.5 font-mono tabular-nums">
+                                  <strong className="text-white">{s.weightKg} kg × {s.reps}</strong>
+                                  <span className="text-slate-400">RIR {s.rir}</span>
                                   {Number(s.estimated1RM) > 0 && (
-                                    <span className="text-emerald-400 font-semibold text-[11px]">
-                                      1RM: {s.estimated1RM} kg
+                                    <span className="text-orange-300 font-semibold text-[11px]">
+                                      1RM {s.estimated1RM} kg
                                     </span>
                                   )}
                                 </div>
@@ -190,4 +190,3 @@ export function WorkoutHistory() {
     </div>
   )
 }
-

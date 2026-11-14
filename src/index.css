@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
 @layer base {
   :root {
     color-scheme: dark;
@@ -7,9 +13,18 @@
 
   html,
   body {
-    background-color: #09090b;
-    color: #f4f4f5;
+    background-color: #07090f;
+    color: #f1f5f9;
+    font-family: var(--font-sans);
     -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
   }
 
   /* Evitar flechas pequeñas en inputs numéricos móviles para usar botones táctiles propios */
@@ -24,6 +39,35 @@
   }
 }
 
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fondo atmosférico sutil y colorido del estudio atlético */
+.irontrack-canvas {
+  background-color: #07090f;
+  background-image:
+    radial-gradient(ellipse 75% 45% at 15% -5%, rgba(249, 115, 22, 0.11), transparent 65%),
+    radial-gradient(ellipse 65% 40% at 85% 5%, rgba(6, 182, 212, 0.1), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(16, 185, 129, 0.07), transparent 65%);
+}
+
+/* Superficie base con borde sutil */
+.surface-card {
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.88) 0%, rgba(12, 17, 29, 0.94) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.55);
+}
+
 .pb-safe {
-  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  padding-bottom: max(0.65rem, env(safe-area-inset-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
